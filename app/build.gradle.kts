@@ -30,8 +30,8 @@ android {
   applicationId = "com.ez.gboardw"
   minSdk = 31
   targetSdk = 36
-  versionCode = 6
-  versionName = "0.1.5"
+   versionCode = 8
+   versionName = "0.1.7"
  }
  compileOptions {
   sourceCompatibility = JavaVersion.VERSION_17
@@ -40,6 +40,12 @@ android {
  kotlinOptions { jvmTarget = "17" }
 }
 dependencies {
- compileOnly("de.robv.android.xposed:api:82")
+  // DexKit (playbook: zalo-patch DexKitBridgeRunner isolation + fingerprint +
+  // preflight): upstream LuckyPray/DexKit 2.2.0, Maven Central
+  // org.luckypray:dexkit:2.2.0 (AAR). Kotlin bindings are Apache-2.0; native
+  // Core/ is LGPL-3.0 and ships unmodified inside this APK, loaded via
+  // System.loadLibrary (dynamic link). Notices live in assets/dexkit-notices.txt.
+  implementation("org.luckypray:dexkit:2.2.0")
+  compileOnly("de.robv.android.xposed:api:82")
  testImplementation("junit:junit:4.13.2")
 }
